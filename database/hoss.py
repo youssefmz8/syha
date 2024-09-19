@@ -1,1 +1,5 @@
-printf("hello joe and sheeko")
+print("hello joe and sheeko")
+print("f")
+print("u")
+print("c")
+print("k")
