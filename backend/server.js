@@ -1,26 +1,46 @@
 const express = require('express');
 const cors = require('cors');
+const incomeExpenseRoutes = require('./routes/IncomeExpenseRoutes');
+const invoiceroutes = require('./routes/invoiceroutes'); // Assuming you have this file created
+
 const app = express();
 
 // CORS configuration to allow requests from the React frontend
-const corsOptions = {
-  origin: 'http://localhost:3000', // Allow requests from this React frontend URL
-  methods: 'GET,POST,PUT,DELETE', // Specify allowed HTTP methods (optional, default is GET)
-  optionsSuccessStatus: 200, // Some legacy browsers choke on 204 status, so use 200
+app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(express.json()); // Parse incoming JSON
+
+// Placeholder for MySQL connection
+const db = {
+    connect: (callback) => {
+        console.log('MySQL connected (placeholder)');
+        callback(null); // Simulate successful connection
+    },
+    query: (sql, params, callback) => {
+        console.log(`Query executed: ${sql} with params: ${JSON.stringify(params)}`);
+        callback(null, []); // Simulate empty results
+    }
 };
 
-// Enable CORS with the specified options
-app.use(cors(corsOptions));
-
-// Basic GET route that sends a message to the React frontend
-app.get('/', (req, res) => {
-  res.send('Hello, this is your backend!'); // The message React will receive
+// Connect to MySQL (using placeholder)
+db.connect(err => {
+    if (err) {
+        console.error('MySQL connection error:', err);
+    } else {
+        console.log('MySQL connected (placeholder)');
+    }
 });
 
-// Define the port, use environment variable if available, otherwise default to 5000
-const PORT = process.env.PORT || 4000;
+// Use routes
+app.use('/api/income-expenses', IncomeExpenseRoutes);
+app.use('/api/invoices', invoiceroutes); // Use routes for invoices
 
-// Start the server, listening on the specified port
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server running on http://localhost:${PORT}`); // Use backticks for template literal
+// Basic route for testing
+app.get('/', (req, res) => {
+    res.send('Hello, this is your backend!');
+});
+
+// Start server
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
 });
