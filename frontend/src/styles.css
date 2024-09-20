@@ -1,0 +1,239 @@
+/* Root Variables */
+:root {
+  --background-dark: #121212; /* Dark mode background */
+  --background-light: #1f1f1f; /* Light background for forms and cards */
+  --text-color: #e0e0e0; /* Default text color */
+  --title-color: #ffffff; /* Title color */
+  --button-bg: #1e88e5; /* Button background color */
+  --button-bg-hover: #1565c0; /* Button hover color */
+}
+
+/* Home Page Styles */
+.home {
+  text-align: center;
+  padding: 50px 20px 0;
+  background-color: var(--background-dark);
+  min-height: 100vh;
+  color: var(--text-color);
+}
+
+h1 {
+  color: var(--title-color);
+}
+
+.cta-button {
+  padding: 10px 20px;
+  background-color: var(--button-bg);
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cta-button:hover {
+  background-color: var(--button-bg-hover);
+}
+
+/* Fixed Navigation Bar */
+.navbar {
+  display: flex;
+  align-items: center;
+  background-color: var(--background-light);
+  padding: 15px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  margin: 0;
+}
+
+/* Logo */
+.logo {
+  font-size: 24px;
+  color: var(--text-color);
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+/* Navigation Links */
+.nav-container {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.nav-links {
+  display: flex;
+  gap: 15px;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links a,
+.auth-links a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.nav-links a:hover,
+.auth-links a:hover {
+  color: var(--title-color);
+}
+
+/* Auth Links */
+.auth-links {
+  display: flex;
+  gap: 15px;
+}
+
+/* Banner Image */
+.home-banner {
+  width: 100%;
+  height: 25vh;
+  object-fit: cover;
+  margin-top: 60px;
+  filter: brightness(0.7);
+}
+
+/* Dashboard Styles */
+.dashboard {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: var(--background-dark);
+  color: var(--text-color);
+}
+
+.dashboard h1 {
+  color: var(--title-color);
+}
+
+/* Metrics Section */
+.metrics {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.metric-card {
+  background-color: var(--background-light);
+  padding: 20px;
+  border-radius: 5px;
+  flex: 1;
+  margin-right: 20px;
+}
+
+.metric-card:last-child {
+  margin-right: 0;
+}
+
+/* Recent Transactions Table */
+.recent-transactions table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.recent-transactions th,
+.recent-transactions td {
+  border: 1px solid #444;
+  padding: 8px;
+  text-align: left;
+}
+
+.recent-transactions th {
+  background-color: var(--background-light);
+}
+
+/* Auth Buttons Container */
+.auth-buttons {
+  margin-top: 20px; /* Space above buttons */
+  display: flex;
+  flex-direction: column; /* Stack buttons vertically */
+  align-items: center; /* Center buttons */
+  gap: 10px; /* Space between buttons */
+}
+
+/* Please Sign In Message */
+.sign-in-message {
+  margin-bottom: 10px; /* Space below the message */
+}
+
+/* SignUp and SignIn Page Styles */
+.signup,
+.signin {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: var(--background-dark);
+  color: var(--text-color);
+  min-height: 100vh;
+}
+
+.signup h1,
+.signin h1 {
+  color: var(--title-color);
+  margin-bottom: 30px;
+}
+
+/* Form Container */
+.form-container {
+  background-color: var(--background-light);
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  display: inline-block;
+}
+
+/* Form Group */
+.form-group {
+  margin: 15px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Label and Input */
+label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #444;
+  border-radius: 5px;
+  width: 300px;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--button-bg);
+}
+
+/* Submit Button */
+.submit-button {
+  padding: 10px 20px;
+  background-color: var(--button-bg);
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 150px; /* Set a fixed width for the buttons */
+}
+
+.submit-button:hover {
+  background-color: var(--button-bg-hover);
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .metrics {
+    flex-direction: column;
+  }
+
+  .metric-card {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+}
