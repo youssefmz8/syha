@@ -1,26 +1,65 @@
-import React, { useEffect, useState } from 'react';
+// src/App.js
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import Home from './Home';
+import Dashboard from './Dashboard'; // Import the Dashboard component
+import Records from './Records'; // Import the Records component
+import Transactions from './Transactions'; // Import the Transactions component
+import Settings from './Settings'; // Import the Settings component
+import SignUp from './SignUp'; // Import the SignUp component
+import SignIn from './SignIn'; // Import the SignIn component
+import Navigation from './Navigation'; // Ensure Navigation is imported
+import './styles.css';
 
-function App() {
-  // Define state to hold the response data from the backend
-  const [message, setMessage] = useState('');
+const App = () => {
+  const [bannerText, setBannerText] = useState('Welcome to the Home Page');
 
-  // useEffect will run once when the component is mounted
-  useEffect(() => {
-    // Fetch data from the Node.js backend
-    fetch('http://localhost:4000')  // Ensure this is the correct backend URL
-      .then(response => response.text())  // Get the response as plain text
-      .then(data => {
-        setMessage(data);  // Update the message state with the response data
-      })
-      .catch(err => console.error('Error fetching data:', err));  // Handle any errors
-  }, []);  // Empty dependency array means this effect runs only once when the component is mounted
+  const handleNavClick = (text) => {
+    setBannerText(text);
+  };
 
   return (
-    <div>
-      <h1>React Frontend</h1>
-      <p>{message ? message : 'Loading...'}</p> {/* Display the backend message or loading */}
-    </div>
+    <Router>
+      <Navigation onNavClick={handleNavClick} />
+      <div>
+        <Routes>
+          <Route 
+            path="/" 
+            element={<Home bannerText={bannerText} />} 
+          />
+          <Route 
+            path="/dashboard" 
+            element={<Dashboard bannerText={bannerText} />} 
+          />
+          <Route 
+            path="/records" 
+            element={<Records bannerText={bannerText} />} 
+          />
+          <Route 
+            path="/transactions" 
+            element={<Transactions bannerText={bannerText} />} 
+          />
+          <Route 
+            path="/settings" 
+            element={<Settings bannerText={bannerText} />} 
+          />
+          <Route 
+            path="/signup" 
+            element={<SignUp />} // Sign Up page route
+          />
+          <Route 
+            path="/signin" 
+            element={<SignIn />} // Sign In page route
+          />
+          {/* Redirect any other routes to Home */}
+          <Route 
+            path="*" 
+            element={<Navigate to="/" replace />} 
+          />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
-export default App;
+export default App;
