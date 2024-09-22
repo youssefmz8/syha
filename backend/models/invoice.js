@@ -1,15 +1,23 @@
-const mongoose = require('mongoose');
+// Placeholder for MySQL model
+const invoiceModel = {
+    customerName: '', // String for customer name
+    items: [],        // Array of items, each with description and amount
+    totalAmount: 0,   // Numeric value for total amount
+    date: new Date(), // Default to current date
+};
 
-const invoiceSchema = new mongoose.Schema({
-    customerName: { type: String, required: true },
-    items: [
-        {
-            description: { type: String, required: true },
-            amount: { type: Number, required: true },
-        },
-    ],
-    totalAmount: { type: Number, required: true },
-    date: { type: Date, default: Date.now },
-});
+// Function to create an invoice
+const createInvoice = (data) => {
+    // This function will handle inserting data into MySQL
+    // For now, it just returns the placeholder
+    return {
+        ...invoiceModel,
+        ...data,
+        date: data.date || new Date(), // Set date to provided or default
+    };
+};
 
-module.exports = mongoose.model('Invoice', invoiceSchema);
+module.exports = {
+    invoiceModel,
+    createInvoice,
+};

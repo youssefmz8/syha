@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-const incomeExpenseRoutes = require('./routes/IncomeExpenseRoutes');
-const invoiceroutes = require('./routes/invoiceroutes'); // Assuming you have this file created
+const routemanager = require('./routes/routemanager'); // Correct path for the route manager
+const errorHandler = require('./middleware/errorhandler'); // Include the error handler
 
 const app = express();
 
@@ -30,14 +30,22 @@ db.connect(err => {
     }
 });
 
-// Use routes
-app.use('/api/income-expenses', IncomeExpenseRoutes);
-app.use('/api/invoices', invoiceroutes); // Use routes for invoices
+// Use routes from routemanager
+if (routemanager && Object.keys(routemanager).length) {
+    Object.entries(routemanager).forEach(([path, route]) => {
+        app.use(`/api${path}`, route); // Add `/api` prefix to all routes
+    });
+} else {
+    console.error("No routes found in the route manager.");
+}
 
 // Basic route for testing
 app.get('/', (req, res) => {
     res.send('Hello, this is your backend!');
 });
+
+// Error handling middleware
+app.use(errorHandler); // Use error handler
 
 // Start server
 const PORT = process.env.PORT || 4000;
