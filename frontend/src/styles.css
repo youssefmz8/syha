@@ -6,6 +6,23 @@
   --title-color: #ffffff; /* Title color */
   --button-bg: #1e88e5; /* Button background color */
   --button-bg-hover: #1565c0; /* Button hover color */
+  --border-color: #444; /* Border color */
+}
+
+/* Global Styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: var(--background-dark);
+  color: var(--text-color);
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: initial;
 }
 
 /* Home Page Styles */
@@ -14,7 +31,6 @@
   padding: 50px 20px 0;
   background-color: var(--background-dark);
   min-height: 100vh;
-  color: var(--text-color);
 }
 
 h1 {
@@ -28,6 +44,7 @@ h1 {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin: 10px 0; /* Space between buttons */
 }
 
 .cta-button:hover {
@@ -45,7 +62,6 @@ h1 {
   left: 0;
   right: 0;
   z-index: 1000;
-  margin: 0;
 }
 
 /* Logo */
@@ -97,12 +113,29 @@ h1 {
   filter: brightness(0.7);
 }
 
+/* Home Page Additional Styles */
+
+/* Container for the home banner and text */
+.home-banner-container {
+  position: relative; /* Allows positioning of text over the image */
+}
+
+.banner-text {
+  position: absolute; /* Position the text over the banner */
+  top: 100%; /* Adjust as needed */
+  left: 50%; /* Center the text */
+  transform: translateX(-50%); /* Centering effect */
+  color: var(--title-color);
+  font-size: 24px; /* Adjust font size as needed */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Adds contrast against the background */
+}
+
 /* Dashboard Styles */
 .dashboard {
   text-align: center;
   padding: 50px 20px;
   background-color: var(--background-dark);
-  color: var(--text-color);
+  min-height: 100vh;
 }
 
 .dashboard h1 {
@@ -136,7 +169,7 @@ h1 {
 
 .recent-transactions th,
 .recent-transactions td {
-  border: 1px solid #444;
+  border: 1px solid var(--border-color);
   padding: 8px;
   text-align: left;
 }
@@ -151,7 +184,7 @@ h1 {
   display: flex;
   flex-direction: column; /* Stack buttons vertically */
   align-items: center; /* Center buttons */
-  gap: 10px; /* Space between buttons */
+  gap: 15px; /* Space between buttons */
 }
 
 /* Please Sign In Message */
@@ -201,7 +234,7 @@ label {
 
 input {
   padding: 10px;
-  border: 1px solid #444;
+  border: 1px solid var(--border-color);
   border-radius: 5px;
   width: 300px;
 }
@@ -211,19 +244,108 @@ input:focus {
   border-color: var(--button-bg);
 }
 
-/* Submit Button */
-.submit-button {
+/* Settings Page Styles */
+.settings {
+  padding: 50px 20px;
+  background-color: var(--background-dark);
+  color: var(--text-color);
+  min-height: 100vh;
+  text-align: center;
+}
+
+.settings h1 {
+  color: var(--title-color);
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.settings-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Center items vertically */
+  width: 100%;
+}
+
+.setting-item {
+  margin-bottom: 20px; /* Add space below each setting item */
+  width: 350px; /* Set a consistent width */
+  display: flex;
+  flex-direction: row; /* Stack label and input */
+  align-items: Left; /* Center label and input */
+  text-align: center; /* Center text inside the items */
+}
+
+/* Ensure label and input are centered */
+.setting-item label {
+  text-align: left; /* Center the label */
+  width: 80%;
+}
+
+.setting-item input {
+  width: 120%; /* Make the input field take the full width of the container */
+  text-align: left; /* Center the text inside the input */
+}
+
+/* Logout Button */
+.logout-button {
+  background-color: var(--button-bg);
+  color: #fff;
+  padding: 10px 20px; /* Increased padding for better appearance */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 10%; /* Full width */
+  margin-top: 10px;
+}
+
+.logout-button:hover {
+  background-color: var(--button-bg-hover);
+}
+
+/* Save Changes Button */
+.save-changes-button {
   padding: 10px 20px;
   background-color: var(--button-bg);
   color: #ffffff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  width: 150px; /* Set a fixed width for the buttons */
+  width: 10%; /* Full width */
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
-.submit-button:hover {
+.save-changes-button:hover {
   background-color: var(--button-bg-hover);
+}
+
+/* Dropdown Menu Styles */
+.dropdown-menu {
+  background-color: var(--background-light);
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  width: 300px;
+  margin-top: 10px;
+  position: relative; /* Dropdown should align properly */
+  display: none; /* Hidden by default */
+  flex-direction: column;
+}
+
+.dropdown-item {
+  padding: 15px 20px;
+  color: var(--text-color);
+  cursor: pointer;
+  text-align: center;
+}
+
+.dropdown-item:hover {
+  background-color: var(--button-bg-hover);
+}
+
+/* Show dropdown when active */
+.dropdown-menu.show {
+  display: flex;
 }
 
 /* Media Queries for Responsiveness */
@@ -236,4 +358,99 @@ input:focus {
     margin-right: 0;
     margin-bottom: 20px;
   }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: center;
+  }
 }
+
+/* Banner Style for Settings Page */
+.banner {
+  width: 100%;
+  height: 25vh; /* Adjust height as needed */
+  object-fit: cover;
+  filter: brightness(0.7);
+  margin-top: 60px; /* Adjust margin based on your layout */
+}
+
+/* Footer Styles */
+.footer {
+  background-color: var(--background-light);
+  color: var(--text-color);
+  padding: 2px; /* Reduced padding */
+  position: initial;
+  bottom: 10%;
+  width:100%;
+  text-align: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-image {
+  height: 50px; /* Adjust height as needed */
+  width: auto; /* Maintain aspect ratio */
+  margin-right: 10px; /* Space between logo and nav links */
+}
+
+/* Additional Image Container */
+.additional-image-container {
+  display: flex; /* Use flexbox to align images horizontally */
+  justify-content: center; /* Center the images */
+  margin: 20px 0; /* Add some margin above and below */
+}
+
+/* Additional Images */
+.additional-image {
+  max-width: 15%; /* Set a max width for responsive design */
+  height: auto; /* Maintain aspect ratio */
+  margin: 0 10px; /* Space between images */
+  border-radius: 8px; /* Optional: rounded corners for images */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Optional: subtle shadow */
+  margin-top: 50px;
+}
+
+/* Features Section */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px; /* Space between cards */
+  margin: 20px 0; /* Space above and below */
+  width: 100%; /* Ensures the features section takes the full width */
+}
+
+.feature-card {
+  background-color: var(--background-light);
+  padding: 20px;
+  border-radius: 8px;
+  cursor: pointer; /* Indicate it's clickable */
+  transition: transform 0.2s; /* Smooth hover effect */
+  margin-top: 30px;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px); /* Slight lift effect on hover */
+}
+
+.feature-card h3 {
+  margin-top: 50px; /* Increased margin to push the text down */
+}
+
+
+.feature-card p {
+  color: var(--text-color);
+}
+.feature-page {
+  text-align: center; /* Center the title */
+  padding-top: 100px; /* Space above the title */
+  padding-bottom: 20px; /* Optional: Space below the title */
+}
+
+.feature-page h1 {
+  margin: 0; /* Remove default margin */
+  color: var(--title-color); /* Ensure title color matches your theme */
+}
+
