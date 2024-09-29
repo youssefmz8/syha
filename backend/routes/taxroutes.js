@@ -13,17 +13,17 @@ const errorHandler = (err, req, res, next) => {
     });
 };
 
-// Route to get all tax records
-router.get('/', async (req, res, next) => {
+// Route to get all taxes for a user
+router.get('/:userId', async (req, res, next) => {
     try {
-        const taxes = await taxController.getAllTaxes();
+        const taxes = await taxController.getTaxes(req.params.userId);
         res.json(taxes);
     } catch (err) {
         next(err);
     }
 });
 
-// Route to create a new tax record
+// Route to create a new tax entry
 router.post('/', async (req, res, next) => {
     try {
         const tax = await taxController.createTax(req.body);
@@ -33,22 +33,22 @@ router.post('/', async (req, res, next) => {
     }
 });
 
-// Route to update a specific tax record
+// Route to update a specific tax entry
 router.put('/:id', async (req, res, next) => {
     try {
         const updatedTax = await taxController.updateTax(req.params.id, req.body);
-        if (!updatedTax) return res.status(404).send('Tax record not found');
+        if (!updatedTax) return res.status(404).send('Tax entry not found');
         res.json(updatedTax);
     } catch (err) {
         next(err);
     }
 });
 
-// Route to delete a tax record
+// Route to delete a specific tax entry
 router.delete('/:id', async (req, res, next) => {
     try {
-        const deletedTax = await taxController.deleteTax(req.params.id);
-        if (!deletedTax) return res.status(404).send('Tax record not found');
+        const deleted = await taxController.deleteTax(req.params.id);
+        if (!deleted) return res.status(404).send('Tax entry not found');
         res.status(204).send(); // No content to send back
     } catch (err) {
         next(err);

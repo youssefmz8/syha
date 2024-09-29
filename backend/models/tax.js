@@ -1,27 +1,71 @@
 // models/tax.js
 
-const taxModel = {
-    transactiontype: '', // String (sale or purchase)
-    amount: 0,           // Number (total amount)
-    gstrate: 0,          // Number (GST percentage)
-    vatrate: 0,          // Number (VAT percentage)
-    totaltax: 0,         // Calculated tax
-    date: new Date(),    // Transaction date
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/database'); // Import the Sequelize instance
+const Business = require('./business'); // Import the Business model
+
+// Define the Tax model using Sequelize
+const Tax = sequelize.define('Tax', {
+    id: {
+        type: DataTypes.CHAR(36), // CHAR(36) for UUIDs
+        primaryKey: true,
+    },
+    businessId: {
+        type: DataTypes.CHAR(36), // Foreign key referencing businesses
+        allowNull: false,
+        references: {
+            model: Business,
+            key: 'id',
+        },
+    },
+    taxType: {
+        type: DataTypes.ENUM('VAT', 'GST'), // ENUM for tax types
+        allowNull: false,
+    },
+    amount: {
+        type: DataTypes.DECIMAL(10, 2), // Decimal for amounts
+        allowNull: true,
+    },
+    filingDate: {
+        type: DataTypes.DATE, // Date for filing date
+        allowNull: true,
+    },
+    dueDate: {
+        type: DataTypes.DATE, // Date for due date
+        allowNull: true,
+    },
+    status: {
+        type: DataTypes.ENUM('filed', 'pending'), // ENUM for status
+        allowNull: false,
+    },
+    createdAt: {
+        type: DataTypes.DATE, // Use DataTypes.DATE for timestamps
+        allowNull: false, // It's good practice to require this
+        defaultValue: DataTypes.NOW, // Automatically set to current timestamp
+    },
+    updatedAt: {
+        type: DataTypes.DATE, // Use DataTypes.DATE for timestamps
+        allowNull: false, // It's good practice to require this
+        defaultValue: DataTypes.NOW, // Automatically updated on changes
+        onUpdate: DataTypes.NOW,
+    },
+}, {
+    tableName: 'taxes', // Specify the table name
+    timestamps: true, // Enable automatic timestamping
+});
+
+// Function to create a new tax record
+const createTax = async (data) => {
+    try {
+        const newTax = await Tax.create(data);
+        return newTax;
+    } catch (error) {
+        throw new Error('Error creating tax record: ' + error.message);
+    }
 };
 
-// Function to calculate GST and VAT
-const calculateTax = (data) => {
-    const totalgst = data.amount * (data.gstrate / 100);
-    const totalvat = data.amount * (data.vatrate / 100);
-    return {
-        ...taxModel,
-        ...data,
-        totaltax: totalgst + totalvat,
-        date: data.date || new Date(),
-    };
-};
-
+// Export the model and utility functions
 module.exports = {
-    taxModel,
-    calculateTax,
+    Tax,
+    createTax,
 };

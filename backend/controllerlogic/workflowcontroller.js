@@ -10,9 +10,14 @@ exports.getAllWorkflows = async (req, res) => {
     }
 };
 
-// Create new workflow
+// Create a new workflow
 exports.createWorkflow = async (req, res) => {
     try {
+        // Validate the request body
+        if (!req.body.name || !req.body.description) {
+            return res.status(400).json({ message: 'Name and description are required.' });
+        }
+        
         const newWorkflow = await Workflow.create(req.body);
         res.status(201).json(newWorkflow);
     } catch (err) {
@@ -23,8 +28,14 @@ exports.createWorkflow = async (req, res) => {
 // Update a workflow
 exports.updateWorkflow = async (req, res) => {
     try {
-        const updatedWorkflow = await Workflow.update(req.body, { where: { id: req.params.id } });
-        res.status(200).json(updatedWorkflow);
+        const [updated] = await Workflow.update(req.body, { where: { id: req.params.id } });
+        
+        if (updated) {
+            const updatedWorkflow = await Workflow.findOne({ where: { id: req.params.id } });
+            res.status(200).json(updatedWorkflow);
+        } else {
+            res.status(404).json({ message: 'Workflow not found.' });
+        }
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
@@ -33,8 +44,13 @@ exports.updateWorkflow = async (req, res) => {
 // Delete a workflow
 exports.deleteWorkflow = async (req, res) => {
     try {
-        await Workflow.destroy({ where: { id: req.params.id } });
-        res.status(204).json();
+        const deleted = await Workflow.destroy({ where: { id: req.params.id } });
+        
+        if (deleted) {
+            res.status(204).json();
+        } else {
+            res.status(404).json({ message: 'Workflow not found.' });
+        }
     } catch (err) {
         res.status(500).json({ error: err.message });
     }

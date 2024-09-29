@@ -1,31 +1,36 @@
-// models/users.js
+// models/user.js
 
-const users = []; // Placeholder for user data
+const { Sequelize, DataTypes } = require('sequelize'); // Import Sequelize and DataTypes
+const sequelize = require('../config/database'); // Import the Sequelize instance
+const { v4: uuidv4 } = require('uuid'); // Import uuid for generating UUIDs
 
-// Function to create a new user
-const createUser = (userData) => {
-    const newUser = {
-        id: users.length + 1,
-        username: userData.username,
-        password: userData.password, // In a real app, make sure to hash passwords!
-        businessName: userData.businessName,
-    };
-    users.push(newUser);
-    return newUser;
-};
+// Define the User model using Sequelize
+const User = sequelize.define('User', {
+    id: {
+        type: DataTypes.CHAR(36), // CHAR(36) for UUIDs
+        primaryKey: true,
+        defaultValue: uuidv4(), // Generate a UUID by default
+    },
+    name: {
+        type: DataTypes.STRING(255), // VARCHAR(255)
+        allowNull: false,
+    },
+    email: {
+        type: DataTypes.STRING(255), // VARCHAR(255)
+        allowNull: false,
+        unique: true,
+    },
+    password: {
+        type: DataTypes.STRING(255), // VARCHAR(255)
+        allowNull: false,
+    },
+    role: {
+        type: DataTypes.ENUM('owner', 'employee'), // ENUM for roles
+        allowNull: false,
+    },
+}, {
+    timestamps: true, // Automatically adds createdAt and updatedAt
+});
 
-// Function to find a user by username
-const findUserByUsername = (username) => {
-    return users.find(user => user.username === username);
-};
-
-// Function to get all users (for testing purposes)
-const getAllUsers = () => {
-    return users;
-};
-
-module.exports = {
-    createUser,
-    findUserByUsername,
-    getAllUsers,
-};
+// Export the model and utility functions
+module.exports = User;

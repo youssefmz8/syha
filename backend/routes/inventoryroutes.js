@@ -13,10 +13,10 @@ const errorHandler = (err, req, res, next) => {
     });
 };
 
-// Route to get all inventory records
-router.get('/', async (req, res, next) => {
+// Route to get all inventory records for a specific business
+router.get('/:businessId', async (req, res, next) => {
     try {
-        const inventoryItems = await inventoryController.getAllInventoryItems();
+        const inventoryItems = await inventoryController.getInventoryForBusiness(req.params.businessId);
         res.json(inventoryItems);
     } catch (err) {
         next(err);
@@ -26,7 +26,7 @@ router.get('/', async (req, res, next) => {
 // Route to create a new inventory item
 router.post('/', async (req, res, next) => {
     try {
-        const inventoryItem = await inventoryController.createInventoryItem(req.body);
+        const inventoryItem = await inventoryController.addInventoryItem(req.body);
         res.status(201).json(inventoryItem);
     } catch (err) {
         next(err);

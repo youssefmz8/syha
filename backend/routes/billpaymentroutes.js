@@ -16,7 +16,7 @@ const errorHandler = (err, req, res, next) => {
 // Route to get all bill payments
 router.get('/', async (req, res, next) => {
     try {
-        const billPayments = await billPaymentController.getAllBillPayments();
+        const billPayments = await billPaymentController.getBillsPayments(); // Updated function call
         res.json(billPayments);
     } catch (err) {
         next(err); // Pass the error to the error handler
@@ -26,7 +26,7 @@ router.get('/', async (req, res, next) => {
 // Route to create a new bill payment
 router.post('/', async (req, res, next) => {
     try {
-        const bill = await billPaymentController.createBill(req.body); // Use async/await for controller
+        const bill = await billPaymentController.createBillPayment(req.body); // Updated function call
         res.status(201).json(bill);
     } catch (err) {
         next(err);
@@ -47,8 +47,8 @@ router.put('/:id', async (req, res, next) => {
 // Route to delete a specific bill payment
 router.delete('/:id', async (req, res, next) => {
     try {
-        const deletedBill = await billPaymentController.deleteBillPayment(req.params.id);
-        if (!deletedBill) return res.status(404).send('Bill payment not found');
+        const deletedCount = await billPaymentController.deleteBillPayment(req.params.id);
+        if (!deletedCount) return res.status(404).send('Bill payment not found');
         res.status(204).send(); // No content to send back
     } catch (err) {
         next(err);

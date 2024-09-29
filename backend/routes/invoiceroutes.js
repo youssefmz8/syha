@@ -3,6 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const invoiceController = require('../controllerlogic/invoicecontroller');
+const { validateInvoice } = require('../middleware/validationmiddleware'); // Import your validation middleware
 
 // Middleware for error handling
 const errorHandler = (err, req, res, next) => {
@@ -17,28 +18,28 @@ const errorHandler = (err, req, res, next) => {
 router.get('/', async (req, res, next) => {
     try {
         const invoices = await invoiceController.getAllInvoices();
-        res.json(invoices);
+        res.json({ success: true, data: invoices });
     } catch (err) {
         next(err);
     }
 });
 
-// Route to create a new invoice
-router.post('/', async (req, res, next) => {
+// Route to create a new invoice with validation
+router.post('/', validateInvoice, async (req, res, next) => {
     try {
         const invoice = await invoiceController.createInvoice(req.body);
-        res.status(201).json(invoice);
+        res.status(201).json({ success: true, data: invoice });
     } catch (err) {
         next(err);
     }
 });
 
-// Route to update a specific invoice
-router.put('/:id', async (req, res, next) => {
+// Route to update a specific invoice with validation
+router.put('/:id', validateInvoice, async (req, res, next) => {
     try {
         const updatedInvoice = await invoiceController.updateInvoice(req.params.id, req.body);
-        if (!updatedInvoice) return res.status(404).send('Invoice not found');
-        res.json(updatedInvoice);
+        if (!updatedInvoice) return res.status(404).json({ success: false, message: 'Invoice not found' });
+        res.json({ success: true, data: updatedInvoice });
     } catch (err) {
         next(err);
     }
@@ -48,7 +49,7 @@ router.put('/:id', async (req, res, next) => {
 router.delete('/:id', async (req, res, next) => {
     try {
         const deletedInvoice = await invoiceController.deleteInvoice(req.params.id);
-        if (!deletedInvoice) return res.status(404).send('Invoice not found');
+        if (!deletedInvoice) return res.status(404).json({ success: false, message: 'Invoice not found' });
         res.status(204).send(); // No content to send back
     } catch (err) {
         next(err);
@@ -59,4 +60,3 @@ router.delete('/:id', async (req, res, next) => {
 router.use(errorHandler); // Use error handler
 
 module.exports = router;
-

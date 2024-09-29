@@ -1,39 +1,62 @@
 // controllerlogic/authcontroller.js
 
-const User = require('../models/user'); // Import user model
+const { createUser, findUserByUsername, comparePassword, findUserByEmail } = require('../models/auth');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-// Secret key for JWT (use environment variables in production)
-const SECRET_KEY = process.env.JWT_SECRET || 'your_secret_key';
+// Sign-up function (allows multiple businesses)
+const signup = async (req, res) => {
+    const { username, password, email, businessName } = req.body;
 
-// Login function
+    try {
+        // Check if user already exists
+        const existingUser = await findUserByUsername(username);
+        if (existingUser) {
+            return res.status(400).json({ message: 'User already exists' });
+        }
+
+        // Hash the password before saving
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Create a new user
+        const newUser = await createUser(username, hashedPassword, email, businessName);
+        
+        // Return user data without password
+        const { password: _, ...userWithoutPassword } = newUser;
+
+        res.status(201).json({ message: 'User created successfully', user: userWithoutPassword });
+    } catch (error) {
+        res.status(500).json({ message: 'Internal server error', error });
+    }
+};
+
+// Login function (with placeholder for two-factor auth logic)
 const login = async (req, res) => {
     const { username, password } = req.body;
 
     try {
-        // Find user in the placeholder data (replace with DB query later)
-        const user = await User.findByUsername(username); // Assume this is a method to find the user
-
-        // Check if user exists and password matches (placeholder logic)
-        if (!user || user.password !== password) {
-            return res.status(401).json({ message: 'Invalid username or password' });
+        const user = await findUserByUsername(username);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
         }
 
-        // Create a token
-        const token = jwt.sign({ username: user.username }, SECRET_KEY, { expiresIn: '1h' });
+        // Compare the provided password with the stored hash
+        const isMatch = await comparePassword(password, user.password);
+        if (!isMatch) {
+            return res.status(400).json({ message: 'Invalid credentials' });
+        }
 
-        // Respond with the token
-        res.json({ token });
+        // Optional: Add logic for two-factor authentication here
+
+        // Generate JWT token
+        const token = jwt.sign({ userId: user.id, username: user.username }, process.env.JWT_SECRET); // Use environment variable
+        res.status(200).json({ message: 'Login successful', token });
     } catch (error) {
-        console.error('Login error:', error);
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(500).json({ message: 'Internal server error', error });
     }
 };
 
-// Additional functions can be added here (e.g., signUp)
-
-// Export the controller functions
 module.exports = {
-    login,
-    // other exports can go here...
+    signup,
+    login
 };

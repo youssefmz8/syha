@@ -1,34 +1,16 @@
+require('dotenv').config(); // Load environment variables from .env file
+
 const express = require('express');
 const cors = require('cors');
 const routemanager = require('./routes/routemanager'); // Correct path for the route manager
 const errorHandler = require('./middleware/errorhandler'); // Include the error handler
+const sequelize = require('./config/database'); // Import the Sequelize instance
 
 const app = express();
 
 // CORS configuration to allow requests from the React frontend
 app.use(cors({ origin: 'http://localhost:3000' }));
 app.use(express.json()); // Parse incoming JSON
-
-// Placeholder for MySQL connection
-const db = {
-    connect: (callback) => {
-        console.log('MySQL connected (placeholder)');
-        callback(null); // Simulate successful connection
-    },
-    query: (sql, params, callback) => {
-        console.log(`Query executed: ${sql} with params: ${JSON.stringify(params)}`);
-        callback(null, []); // Simulate empty results
-    }
-};
-
-// Connect to MySQL (using placeholder)
-db.connect(err => {
-    if (err) {
-        console.error('MySQL connection error:', err);
-    } else {
-        console.log('MySQL connected (placeholder)');
-    }
-});
 
 // Use routes from routemanager
 if (routemanager && Object.keys(routemanager).length) {
@@ -47,8 +29,29 @@ app.get('/', (req, res) => {
 // Error handling middleware
 app.use(errorHandler); // Use error handler
 
+// Sync the models with the database
+const syncDatabase = async () => {
+    try {
+        await sequelize.sync({ alter: true }); // Sync the models
+        console.log('Database synced successfully.');
+    } catch (error) {
+        console.error('Error syncing database:', error);
+    }
+};
+
 // Start server
 const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
     console.log(`Server running on http://localhost:${PORT}`);
+    await syncDatabase(); // Sync database when server starts
 });
+
+// Graceful shutdown
+const shutdown = async () => {
+    console.log('Shutting down gracefully...');
+    await sequelize.close(); // Close the database connection
+    process.exit(0);
+};
+
+process.on('SIGINT', shutdown); // Handle Ctrl+C
+process.on('SIGTERM', shutdown); // Handle kill commands

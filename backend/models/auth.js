@@ -1,7 +1,40 @@
-// models/auth.js
-
 const bcrypt = require('bcrypt');
-const User = require('./user'); // Adjust the path if necessary
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/database'); // Use Sequelize setup
+
+// Define the User model
+const User = sequelize.define('User', {
+    username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
+    },
+    password: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    businessName: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    // Optional: add email field for two-factor authentication
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
+    },
+    // Optional: Add fields for two-factor authentication (if required later)
+    twoFactorCode: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    twoFactorEnabled: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+    }
+}, {
+    tableName: 'users' // Specify table name in MySQL
+});
 
 // Function to hash a password
 const hashPassword = async (password) => {
@@ -14,31 +47,34 @@ const comparePassword = async (password, hashedPassword) => {
     return await bcrypt.compare(password, hashedPassword);
 };
 
-// Function to create a new user (this can be used during signup)
-const createUser = async (username, password, businessName) => {
-    const hashedPassword = await hashPassword(password);
-    const newUser = new User({
+// Function to create a new user
+const createUser = async (username, password, email, businessName) => {
+    const hashedPassword = await hashPassword(password); // Hash the password before saving
+    const newUser = await User.create({
         username,
         password: hashedPassword,
-        businessName,
+        email,
+        businessName
     });
-
-    // Placeholder for saving the user (replace with your actual DB logic)
-    // await newUser.save();
-
     return newUser; // Return the new user object
 };
 
 // Function to find a user by username
 const findUserByUsername = async (username) => {
-    // Placeholder for database lookup
-    // const user = await User.findOne({ username }); // Replace with actual DB logic
-    return null; // Change this to return the found user
+    const user = await User.findOne({ where: { username } });
+    return user; // Return the found user
 };
 
-// Export the functions
+// Function to find a user by email (for two-factor authentication)
+const findUserByEmail = async (email) => {
+    const user = await User.findOne({ where: { email } });
+    return user;
+};
+
 module.exports = {
+    User,
     createUser,
     findUserByUsername,
-    comparePassword,
+    findUserByEmail,
+    comparePassword
 };
