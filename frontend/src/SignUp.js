@@ -1,44 +1,75 @@
-// src/SignUp.js
-import React from 'react';
-import bannerImage from './Images/banner.jpg'; // Update with your image path
-import './styles.css';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './styles.css'; // Ensure your styles are imported here
+import BannerImage from './Images/banner.jpg'; // Adjust the path to your banner image
 
 const SignUp = () => {
-  return (
-    <div className="signup">
-      <img src={bannerImage} alt="Banner" className="home-banner" />
-      <h1>Sign Up</h1>
-      <div className="form-container">
-        <form>
-          <div className="form-group">
-            <label htmlFor="first-name">First Name</label>
-            <input type="text" id="first-name" placeholder="Enter your first name" required />
-          </div>
-          <div className="form-group">
-            <label htmlFor="last-name">Last Name</label>
-            <input type="text" id="last-name" placeholder="Enter your last name" required />
-          </div>
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input type="email" id="email" placeholder="Enter your email" required />
-          </div>
-          <div className="form-group">
-            <label htmlFor="mobile">Mobile Number</label>
-            <input type="tel" id="mobile" placeholder="Enter your mobile number" required />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input type="password" id="password" placeholder="Enter your password" required />
-          </div>
-          <div className="form-group">
-            <label htmlFor="confirm-password">Retype Password</label>
-            <input type="password" id="confirm-password" placeholder="Retype your password" required />
-          </div>
-          <button type="submit" className="submit-button">Sign Up</button>
-        </form>
-      </div>
-    </div>
-  );
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [error, setError] = useState('');
+    const navigate = useNavigate(); // Use navigate to redirect after sign-up
+
+    const handleSubmit = (e) => {
+        e.preventDefault(); // Prevent default form submission
+
+        if (password !== confirmPassword) {
+            setError('Passwords do not match'); // Set error message
+            return;
+        }
+
+        // Simulate a successful sign-up
+        console.log('User signed up with:', email);
+        navigate('/signin'); // Redirect to Sign In page after sign-up
+    };
+
+    return (
+        <div className="sign-up-container">
+            {/* Banner Image */}
+            <div className="about-banner">
+                <img src={BannerImage} alt="Banner" />
+            </div>
+
+            <div className="form-box">
+                <h1>Sign Up</h1>
+                {error && <p className="error-message">{error}</p>}
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <label>Email:</label>
+                        <input 
+                            type="email" 
+                            value={email} 
+                            onChange={(e) => setEmail(e.target.value)} 
+                            required 
+                        />
+                    </div>
+                    <div>
+                        <label>Password:</label>
+                        <input 
+                            type="password" 
+                            value={password} 
+                            onChange={(e) => setPassword(e.target.value)} 
+                            required 
+                        />
+                    </div>
+                    <div>
+                        <label>Confirm Password:</label>
+                        <input 
+                            type="password" 
+                            value={confirmPassword} 
+                            onChange={(e) => setConfirmPassword(e.target.value)} 
+                            required 
+                        />
+                    </div>
+                    <button type="submit">Sign Up</button>
+                </form>
+            </div>
+
+            <footer className="home-footer">
+                <p>&copy; 2024 SYHA.  All rights reserved.</p>
+            </footer>
+        </div>
+    );
 };
 
 export default SignUp;

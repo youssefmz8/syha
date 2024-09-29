@@ -1,106 +1,65 @@
-// src/App.js
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'; // Import Navigate here
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'; 
 import Home from './Home';
-import Dashboard from './Dashboard';
-import Records from './Records';
-import Transactions from './Transactions';
-import Settings from './Settings';
-import SignUp from './SignUp';
 import SignIn from './SignIn';
-import Navigation from './Navigation';
-import TrackIncome from './TrackIncome'; // Import new components
-import Invoices from './Invoices';
-import GstVat from './GstVat';
-import InsightsReports from './InsightsReports';
-import RecurringTransactions from './RecurringTransactions';
-import EmployeeTimeTracking from './EmployeeTimeTracking';
-import MultiCurrency from './MultiCurrency';
+import SignUp from './SignUp';
+import Dashboard from './Dashboard';
 import Inventory from './Inventory';
-import ProjectProfitability from './ProjectProfitability';
-import ManageBudgets from './ManageBudgets';
-import AutomateWorkflows from './AutomateWorkflows';
-import ProgressInvoicing from './ProgressInvoicing'; // Import your new component
-import ManageBillsPayments from './ManageBillsPayments'; // Import your new component
-import './styles.css';
+import ManageBillPayments from './ManageBillPayments';
+import Taxes from './Taxes';
+import EmployeeManagement from './EmployeeManagement';
+import Reports from './Reports';
+import Settings from './Settings';
+import NotificationSystem from './NotificationSystem';
+import Navigation from './Navigation';
+import AboutUs from './AboutUs'; 
 
 const App = () => {
-  const [bannerText, setBannerText] = useState('Welcome to the Home Page');
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isEmployee, setIsEmployee] = useState(false); 
 
-  const handleNavClick = (text) => {
-    setBannerText(text);
-  };
+    const handleNavClick = (message) => {
+        console.log(message);
+    };
 
-  const handleLogin = () => {
-    setIsLoggedIn(true); // Set login status to true
-  };
+    const handleLogout = () => {
+        setIsLoggedIn(false);
+        setIsEmployee(false);
+        console.log('User logged out');
+    };
 
-  const handleLogout = () => {
-    setIsLoggedIn(false); // Set login status to false
-  };
-
-  return (
-    <Router>
-      <Navigation 
-        onNavClick={handleNavClick} 
-        isLoggedIn={isLoggedIn} 
-        onLogout={handleLogout} 
-      />
-      <div>
-        <Routes>
-          <Route 
-            path="/" 
-            element={<Home bannerText={bannerText} />} 
-          />
-          <Route 
-            path="/dashboard" 
-            element={<Dashboard isSignedIn={isLoggedIn} bannerText={bannerText} />} 
-          />
-          <Route 
-            path="/records" 
-            element={<Records isSignedIn={isLoggedIn} bannerText={bannerText} />} 
-          />
-          <Route 
-            path="/transactions" 
-            element={<Transactions isSignedIn={isLoggedIn} bannerText={bannerText} />} 
-          />
-          <Route 
-            path="/settings" 
-            element={<Settings isSignedIn={isLoggedIn} onLogout={handleLogout} />} 
-          />
-          <Route 
-            path="/signup" 
-            element={<SignUp />} 
-          />
-          <Route 
-            path="/signin" 
-            element={<SignIn onLogin={handleLogin} />} 
-          />
-
-          {/* Feature Routes */}
-          <Route path="/track-income" element={<TrackIncome />} />
-          <Route path="/invoices" element={<Invoices />} />
-          <Route path="/gst-vat" element={<GstVat />} />
-          <Route path="/insights-reports" element={<InsightsReports />} />
-          <Route path="/recurring-transactions" element={<RecurringTransactions />} />
-          <Route path="/employee-time-tracking" element={<EmployeeTimeTracking />} />
-          <Route path="/multi-currency" element={<MultiCurrency />} />
-          <Route path="/inventory" element={<Inventory />} />
-          <Route path="/project-profitability" element={<ProjectProfitability />} />
-          <Route path="/manage-budgets" element={<ManageBudgets />} />
-          <Route path="/automate-workflows" element={<AutomateWorkflows />} />
-          <Route path="/progress-invoicing" element={<ProgressInvoicing />} /> {/* Add this line */}
-          <Route path="/manage-bills-payments" element={<ManageBillsPayments />} /> {/* Add this line */}
-
-          <Route 
-            path="*" 
-            element={<Navigate to="/" replace />} 
-          />
-        </Routes>
-      </div>
-    </Router>
-  );
-}
+    return (
+        <Router>
+            <Navigation 
+                onNavClick={handleNavClick} 
+                isLoggedIn={isLoggedIn} 
+                onLogout={handleLogout} 
+            />
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/aboutus" element={<AboutUs />} />
+                <Route 
+                    path="/signin" 
+                    element={<SignIn setIsLoggedIn={setIsLoggedIn} setIsEmployee={setIsEmployee} />} 
+                />
+                <Route path="/signup" element={<SignUp />} />
+                <Route 
+                    path="/dashboard" 
+                    element={true && !isEmployee ? <Dashboard /> : <Navigate to="/signin" />} 
+                />
+                <Route path="/inventory" element={<Inventory />} />
+                <Route path="/manage-bills" element={<ManageBillPayments />} />
+                <Route path="/taxes" element={<Taxes />} />
+                <Route 
+                    path="/employees" 
+                    element={isLoggedIn && isEmployee ? <EmployeeManagement /> : <Navigate to="/signup" />} 
+                />
+                <Route path="/reports" element={<Reports />} />
+                <Route path="/settings" element={<Settings />} />
+                <Route path="/notifications" element={<NotificationSystem />} />
+            </Routes>
+        </Router>
+    );
+};
 
 export default App;

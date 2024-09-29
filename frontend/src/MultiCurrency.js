@@ -1,15 +1,12 @@
-// src/MultiCurrency.js
 import React from 'react';
-import './styles.css';
 
 const MultiCurrency = () => {
-  return (
-    <div className="feature-page">
-      <h1>Multi-Currency Support</h1>
-      <p>Manage transactions in different currencies.</p>
-      {/* Additional content for this feature goes here */}
-    </div>
-  );
+    return (
+        <div>
+            <h2>Multi-Currency Management</h2>
+            {/* Add multi-currency management logic here */}
+        </div>
+    );
 };
 
 export default MultiCurrency;
