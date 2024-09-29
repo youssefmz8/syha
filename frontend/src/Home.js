@@ -1,57 +1,34 @@
-// src/Home.js
 import React from 'react';
-import Navigation from './Navigation';
-import bannerImage from './Images/banner.jpg'; // Import the banner image
-import additionalImage from './Images/Accounting.jpg'; // Import the additional image
-import boardImage from './Images/board.jpg'; // Import the new image
-import './styles.css';
+import './styles.css'; // Assuming you have styles defined here
+import bannerImage from './Images/banner.jpg'; // Ensure this matches your file name exactly
 
-const Home = ({ bannerText, onSignIn }) => {
+const Home = () => {
   return (
-    <div className="home">
-      <Navigation />
-      <div className="home-banner-container">
-        <img 
-          src={bannerImage} 
-          alt="A professional background for the home page" 
-          className="home-banner" 
-        />
-        <div className="banner-text">
-          <p>Your go-to solution for all accounting and finance needs.</p>
+    <div className="home-container">
+      {/* Banner Image */}
+      <div className="banner">
+        <img src={bannerImage} alt="Banner" />
+      </div>
+
+      <header className="home-header">
+        <h1>Welcome to Your Accounting Solution</h1>
+        <p>Streamline your finances and take control of your business with our comprehensive tools.</p>
+        <p>Whether you're managing bills, tracking expenses, or generating insightful reports, we provide all the resources you need to succeed.</p>
+        <div className="cta-buttons">
+         
         </div>
-      </div>
-      {/* Additional Images After Banner Text */}
-      <div className="additional-image-container">
-        <img 
-          src={additionalImage} 
-          alt="Accounting tools and resources" 
-          className="additional-image" 
-        />
-        <img 
-          src={boardImage} 
-          alt="A whiteboard with financial notes" 
-          className="additional-image" 
-        />
-      </div>
-      
-      <div className="home-content">
-        <h2>Welcome to Pro Accounting Solutions</h2>
-        <p>
-          Streamline your accounting and finance tasks with our powerful, user-friendly platform.
-          Whether you’re managing transactions, generating reports, or analyzing data, our tools are
-          designed to help you stay organized and in control. Elevate your business operations with
-          real-time financial insights, ensuring your decisions are always data-driven and effective.
-        </p>
-        <p>
-          Start your journey to smarter accounting and seamless financial management. Explore our
-          comprehensive features today.
-        </p>
-        <button className="cta-button" onClick={onSignIn}>Get Started</button>
-      </div>
-      <footer className="footer">
+      </header>
+
+      <section className="testimonials-section">
+        <h2>What Our Users Say</h2>
+        <blockquote>
+          <p>"This application has transformed the way I manage my finances. Highly recommended!"</p>
+          <footer>- A Satisfied User</footer>
+        </blockquote>
+      </section>
+
+      <footer className="home-footer">
         <p>&copy; 2024 SYHA. All rights reserved.</p>
-        <p>syha@gmail.com</p>
-        <p>Muscat, Oman</p>
       </footer>
     </div>
   );

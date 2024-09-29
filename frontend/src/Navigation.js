@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './styles.css'; // Assuming your styles are here
+import './styles.css'; // Ensure styles are correctly linked
 import LogoImage from './Images/your-logo.png'; // Adjust the path and filename
 
 const Navigation = ({ onNavClick, isLoggedIn, onLogout }) => {
@@ -12,7 +12,7 @@ const Navigation = ({ onNavClick, isLoggedIn, onLogout }) => {
   };
 
   return (
-    <div className="navbar">
+    <nav className="navbar">
       <div className="logo">
         <Link to="/" onClick={() => handleNavClick('Welcome to the Home Page')}>
           <img src={LogoImage} alt="Logo" className="logo-image" />
@@ -24,13 +24,10 @@ const Navigation = ({ onNavClick, isLoggedIn, onLogout }) => {
             <Link to="/" onClick={() => handleNavClick('Welcome to the Home Page')}>Home</Link>
           </li>
           <li>
+            <Link to="/aboutus" onClick={() => handleNavClick('Welcome to About Us')}>About Us</Link>
+          </li>
+          <li>
             <Link to="/dashboard" onClick={() => handleNavClick('Welcome to the Dashboard')}>Dashboard</Link>
-          </li>
-          <li>
-            <Link to="/records" onClick={() => handleNavClick('Welcome to the Records')}>Records</Link>
-          </li>
-          <li>
-            <Link to="/transactions" onClick={() => handleNavClick('Welcome to the Transactions')}>Transactions</Link>
           </li>
           <li>
             <Link to="/settings" onClick={() => handleNavClick('Welcome to the Settings')}>Settings</Link>
@@ -50,7 +47,7 @@ const Navigation = ({ onNavClick, isLoggedIn, onLogout }) => {
           </>
         )}
       </div>
-    </div>
+    </nav>
   );
 };
 

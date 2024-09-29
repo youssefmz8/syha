@@ -107,10 +107,16 @@ h1 {
 /* Banner Image */
 .home-banner {
   width: 100%;
-  height: 25vh;
+  height: 20pxh;
   object-fit: cover;
   margin-top: 60px;
   filter: brightness(0.7);
+}
+
+.banner img {
+  width:100%; /* Adjust width as necessary */
+  height: auto;
+ 
 }
 
 /* Home Page Additional Styles */
@@ -453,4 +459,643 @@ input:focus {
   margin: 0; /* Remove default margin */
   color: var(--title-color); /* Ensure title color matches your theme */
 }
+.home-container {
+  font-family: Arial, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  color: #333;
+}
 
+.home-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.home-header h1 {
+  margin-top: 250px;
+  font-size: 2.5em;
+  color: #ffffff; /* Change color as needed */
+}
+
+.home-header p {
+  font-size: 1.2em;
+  color: #ffffff; /* Change color as needed */
+}
+
+.features-section {
+  margin-bottom: 40px;
+}
+
+.features-section h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ffffff; /* Change color as needed */
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.feature-card {
+  background: #0056b3; /* Change background as needed */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  transition: box-shadow 0.3s;
+}
+
+.feature-card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.testimonials-section {
+  margin: 40px 0;
+  text-align: center;
+  color: #ffffff
+}
+
+.testimonials-section blockquote {
+  font-style: italic;
+  margin: 20px auto;
+  max-width: 600px;
+  color: #ffffff
+}
+
+.home-footer {
+  text-align: center;
+  padding: 20px 0;
+  border-top: 1px solid #ffffff;
+  margin-top: 40px;
+  color: #ffffff
+}
+.about-us-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.about-banner {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.about-banner img {
+  width: 100%; /* Make the image responsive */
+  max-height: 400px; /* Adjust as necessary */
+  object-fit: cover;
+}
+
+.about-content {
+  margin: 20px 0;
+}
+
+.about-content h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.about-content h2 {
+  font-size: 1.8em;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.about-content p {
+  line-height: 1.6;
+  margin-bottom: 15px;
+  text-align: justify;
+}
+
+.about-features {
+  list-style-type: none;
+  padding: 0;
+}
+
+.about-features li {
+  margin-bottom: 10px;
+  font-size: 1.1em;
+}
+
+.about-footer {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 0.9em;
+  color: #777;
+}
+.dashboard-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.dashboard-header {
+  margin-top: 100px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.features-section {
+  margin-top: 20px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Set 3 cards per row */
+
+}
+
+
+.feature-card {
+  background: #545555;
+  border: 1px solid #ddd;
+  border-radius: 1px;
+  padding: 20px;
+  transition: box-shadow 0.3s;
+  text-align: center;
+ 
+}
+
+.feature-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.feature-link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 15px;
+  background: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.feature-link:hover {
+  background: #0056b3;
+}
+
+
+
+.dashboard-footer {
+  text-align: center;
+  margin-top: 100px;
+  font-size: 0.9em;
+  color: #777;
+
+.footer-link:hover {
+  text-decoration: underline;
+}
+}
+.about-banner img {
+  width: 100%; /* Full width for responsive design */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 5px; /* Rounded corners */
+}
+
+.sign-in-container, .sign-up-container {
+  text-align: center; /* Center the content */
+}
+
+.form-box {
+  max-width: 400px; /* Max width for the form box */
+  margin: 20px auto; /* Center the form box */
+  padding: 30px;
+  border-radius: 8px; /* Rounded corners */
+  background-color: #606060; /* Light grey background */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+h1 {
+  margin-bottom: 20px; /* Spacing below the title */
+  color: #ffffff; /* Darker text color for better readability */
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 10px;
+}
+
+form div {
+  margin-bottom: 15px; /* Spacing between form elements */
+}
+
+input {
+  width: 100%; /* Full width inputs */
+  padding: 10px; /* Inner padding */
+  border-radius: 4px; /* Rounded corners */
+  border: 1px solid #ccc; /* Border styling */
+}
+
+button {
+  background-color: #007bff; /* Bootstrap primary color */
+  color: rgb(255, 255, 255);
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s; /* Transition for hover effect */
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
+
+.home-footer {
+  text-align: center;
+  margin-top: 100px;
+  font-size: 0.9em;
+  color: #777;
+
+.footer-link:hover {
+  text-decoration: underline;
+}
+}/* styles.css */
+
+/* Container for the inventory page */
+.inventory-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Styles for the inventory content section */
+.inventory-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Space between sections */
+}
+
+/* Styles for the inventory box */
+.inventory-box {
+  margin-top: 190px;
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 20px;
+  background-color: #3b3b3b; /* Light gray background */
+}
+
+/* Header styles inside inventory box */
+.inventory-box h2 {
+  margin-bottom: 15px; /* Space below the heading */
+  color: rgb(255, 255, 255);
+}
+
+/* Input fields styling */
+.inventory-form input,
+.inventory-form textarea {
+  width: 100%; /* Full width */
+  padding: 10px; /* Padding inside input */
+  margin-bottom: 15px; /* Space below each input */
+  border: 1px solid #ddd; /* Border for input fields */
+  border-radius: 4px; /* Rounded corners */
+  color: rgb(22, 22, 22);
+}
+
+/* Button styling */
+.inventory-form button {
+  padding: 10px 15px; /* Padding inside the button */
+  background-color: #0056b3; /* Green background */
+  color: white; /* White text */
+  border: none; /* No border */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth transition */
+}
+
+.inventory-form button:hover {
+  background-color: #ffffff; /* Darker green on hover */
+}
+
+
+
+/* Styles for the inventory list box */
+.inventory-list {
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 20px; /* Padding inside the box */
+  background-color: #3b3b3b; /* Dark gray background */
+  color: white; /* Text color for the list */
+  margin-top: 20px; /* Space above the list */
+}
+
+/* Heading styles for the inventory list */
+.inventory-list h2 {
+  margin-top: 0; /* Remove top margin for better spacing */
+  margin-bottom: 15px; /* Space below the heading */
+  color: rgb(255, 255, 255); /* White heading color */
+}
+
+/* List item styling */
+.inventory-list ul {
+  list-style-type: none; /* Remove default list styling */
+  padding: 0; /* Remove padding */
+}
+
+.inventory-list li {
+  padding: 10px; /* Space inside each list item */
+  border-bottom: 1px solid #ddd; /* Separator line */
+  transition: background-color 0.3s; /* Smooth transition for hover */
+}
+
+/* Last item styling to remove bottom border */
+.inventory-list li:last-child {
+  border-bottom: none; /* Remove the border for the last item */
+}
+
+/* Hover effect for list items */
+.inventory-list li:hover {
+  background-color: #f0f0f0; /* Change background color on hover */
+  color: #333; /* Change text color on hover */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+/* styles.css */
+
+/* Other existing styles... */
+
+.inventory-box ul {
+  list-style-type: none; /* Removes bullet points */
+  padding: 0; /* Removes default padding */
+}
+
+.inventory-box li {
+  color: white; /* Set text color to white */
+  margin: 5px 0; /* Adds space between items */
+}
+/* General Page Styles */
+.manage-bill-payments-container {
+  padding: 20px;
+  background-color: #141414;
+  min-height: 100vh;
+}
+
+/* Banner Styles */
+.banner {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.banner img {
+  width: 100%; /* Make the image responsive */
+  max-height: 200px; /* Adjust as necessary */
+  object-fit: cover;
+}
+
+/* Bill Payments Section */
+.bill-payments-content {
+  margin: 20px auto;
+  max-width: 800px;
+  background-color: #4a4949;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.bill-payments-content h1 {
+  text-align: center;
+  color: #000000;
+  margin-bottom: 30px;
+}
+
+/* Bill Form */
+.bill-form-container {
+  margin-bottom: 40px;
+}
+
+.bill-form-container h2 {
+  color: #000000;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.bill-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.bill-form input {
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  width: 100%;
+}
+
+.bill-form button {
+  padding: 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.bill-form button:hover {
+  background-color: #007bff;
+}
+
+/* Bill List */
+.bill-list-container {
+  text-align: center;
+}
+
+.bill-list-container h2 {
+  color: #000000;
+  margin-bottom: 20px;
+}
+
+.bill-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.bill-table th,
+.bill-table td {
+  padding: 10px;
+  border: 1px solid #343434;
+  text-align: left;
+}
+
+.bill-table th {
+  background-color: #007bff;
+  color: white;
+}
+
+.bill-table td {
+  background-color: #5e5e5e;
+}
+
+.bill-table tbody tr:hover {
+  background-color: #000000;
+}
+
+/* Footer Styles */
+.home-footer {
+  text-align: center;
+  padding: 20px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  margin-top: 50px;
+}
+
+.home-footer p {
+  color: #ffffff;
+  font-size: 14px;
+}
+/* Employee Management Page Styles */
+.employee-management-container {
+  padding: 40px;
+}
+
+.employee-management-box,
+.employee-list-box {
+  background-color: #353535;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.employee-management-box h2,
+.employee-list-box h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #e0e0e0;
+}
+
+.employee-management-form input {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.employee-management-form button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.employee-management-form button:hover {
+  background-color: #0056b3;
+}
+
+.employee-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.employee-list li {
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #1a1a1a;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  
+}
+
+.employee-list li strong {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Banner Styles */
+.banner {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.banner img {
+  width: 100%; /* Make the image responsive */
+  max-height: 200px; /* Adjust as necessary */
+  object-fit: cover;
+}
+
+/* Footer Styles */
+.home-footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px 0;
+  
+  color: #333;
+}
+
+.home-footer p {
+  margin: 0;
+}
+/* Employee Login Styles */
+.login-container {
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.login-container h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.login-container input {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.login-container button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.login-container button:hover {
+  background-color: #0056b3;
+}
+
+/* Shop System Styles */
+.shop-system-container {
+  max-width: 800px;
+  margin: 40px auto;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.shop-system-container h2 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.shop-system-container p {
+  font-size: 18px;
+  color: #555;
+}

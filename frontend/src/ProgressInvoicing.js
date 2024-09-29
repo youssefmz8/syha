@@ -1,15 +1,12 @@
-// src/ProgressInvoicing.js
 import React from 'react';
-import './styles.css';
 
 const ProgressInvoicing = () => {
-  return (
-    <div className="feature-page">
-      <h1>Progress Invoicing</h1>
-      <p>Create and manage invoices for ongoing projects.</p>
-      {/* Additional content for this feature goes here */}
-    </div>
-  );
+    return (
+        <div>
+            <h2>Progress Invoicing</h2>
+            {/* Add progress invoicing logic here */}
+        </div>
+    );
 };
 
 export default ProgressInvoicing;
